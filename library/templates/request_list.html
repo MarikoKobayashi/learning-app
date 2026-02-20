@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">📋 図書リクエスト一覧</h2>
+    {% for r in requests %}
+    <div class="card mb-3">
+        <div class="card-body">
+            <h5 class="card-title">{{ r.title }}</h5>
+
+            <p class="card-text">
+                著者：{{ r.author }}<br>
+                理由：{{ r.reason }}
+            </p>
+        </div>
+    </div>
+    {% endfor %}
+    <!-- <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>書名</th>
+                <th>著者</th>
+                <th>理由</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for r in requests %}
+            <tr>
+                <td>{{ r.title }}</td>
+                <td>{{ r.author}}</td>
+                <td>{{ r.reason }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table> -->
+
+    <a href="{{ url_for('request_book') }}" class="btn btn-primary">
+        新しく申請する
+    </a>
+</div>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">📘 図書リクエスト申請</h2>
+
+    {{ render_form(form, button_map={'submit':'primary'}) }}
+
+    <a href="{{ url_for('request_list') }}" class="btn btn-secondary mt-3">
+        申請一覧を見る
+    </a>
+</div>
+{% endblock %}

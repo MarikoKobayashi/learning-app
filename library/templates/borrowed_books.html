@@ -1,0 +1,44 @@
+{% extends "base.html" %} {% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-10">
+    <h2 class="mb-4">現在借りている本</h2>
+
+    {% if borrowed_list %}
+    <div class="table-responsive">
+      <table class="table table-striped table-hover align-middle">
+        <thead class="table-dark">
+          <tr>
+            <th>タイトル</th>
+            <th>著者</th>
+            <th>貸出日</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for loan in borrowed_list %}
+          <tr>
+            <td>{{ loan.book.title }}</td>
+            <td>{{ loan.book.author }}</td>
+            <td>{{ loan.borrowed_at.strftime('%Y/%m/%d') }}</td>
+            <td>
+              <form method="POST" action="{{ url_for('return_book', loan_id=loan.id) }}">
+                <button class="btn btn-sm btn-success">
+                  返却する
+                </button>
+              </form>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% else %}
+    <div class="alert alert-info">
+      現在借りている書籍はありません。
+      <a href="{{ url_for('search') }}" class="alert-link">書籍検索はこちら</a>
+    </div>
+    {% endif %}
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">📋 貸出一覧</h2>
+    {% if loan_list %}
+    <div class="table-responsive">
+        <table class="table table-striped table-hover align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th>タイトル</th>
+                    <th>著者</th>
+                    <th>貸出日</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for loan in loan_list %}
+                <tr>
+                    <td>{{ loan.book.title }}</td>
+                    <td>{{ loan.book.author }}</td>
+                    <td>{{ loan.borrowed_at.strftime('%Y/%m/%d') }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <div class="alert alert-info">
+        現在借りている書籍はありません。
+        <a href="{{ url_for('search') }}" class="alert-link">書籍検索はこちら</a>
+    </div>
+    {% endif %}
+</div>
+</div>
+
+{% endblock %}
